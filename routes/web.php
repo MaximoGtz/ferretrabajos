@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdministradoresController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiProductosController;
 
 
 // rutas compartidas
@@ -48,10 +49,7 @@ Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::get('/admin/login', [AdminAuthController::class, 'showForm'])->name('login');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout']);
 
-// login
-// Route::get('/login', AdministradoresController::class, 'login')->name('login.formulario');
-// Route::post('admin/auth', AdministradoresController::class, 'auth')->name('admin.auth');
-// Route::get('admins/dashboard', AdministradoresController::class, 'index2')->name('login.formulario');
-// cierr login
-
-// Route::view('/ver/login', '/login/formulario');
+// TAREA DE PRODUCTOS API
+Route::get('/catalogo', [ApiProductosController::class, 'index']);
+Route::get('/catalogo/detalle{id}', [ApiProductosController::class, 'show']);
+// TERMINA TAREA DE PRODUCTOS API
