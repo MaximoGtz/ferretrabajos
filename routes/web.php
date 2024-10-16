@@ -14,9 +14,19 @@ Route::view('/servicios', '/compartidas/servicios');
 Route::view('/contacto', '/compartidas/contacto');
 // termina rutas comprartidas
 
-Route::get('/', function () {
+// trabajando
+Route::get('/login/admin', function () {
     return view('/login/formulario');
 });
+Route::get('/login/cliente', function () {
+    return view('/login/logincliente');
+});
+Route::get('/login/trabajador', function () {
+    return view('/login/logintrabajador');
+});
+Route::view('/', '/compartidas/inicio');
+// termina trabajando
+
 
 
 Route::middleware(['auth:administradore'])->group(function () {
@@ -53,3 +63,7 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout']);
 Route::get('/catalogo', [ApiProductosController::class, 'index']);
 Route::get('/catalogo/detalle{id}', [ApiProductosController::class, 'show']);
 // TERMINA TAREA DE PRODUCTOS API
+
+
+// pruebas
+Route::view('/login/estructura', '/login/seleccionarlogin');
