@@ -1,3 +1,3 @@
-@extends('/login/seleccionarlogin');
+@extends('/login/seleccionarlogin')
 @section('titulo_login', 'Cliente')
-@section('action', '/lo')
+@section('action', '/cliente/login')

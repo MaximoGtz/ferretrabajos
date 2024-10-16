@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\Cliente;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
 class ClienteAuthController extends Controller
 {
     public function showForm()
     {
-        return view('/login/formulario');
+        return view('/login/logincliente');
     }
     public function login(Request $request): RedirectResponse
     {
@@ -18,11 +21,11 @@ class ClienteAuthController extends Controller
         ]);
 
 
-        $administradore = administradore::where('usuario', '=', $request->usuario)->where('estado', 'activo')->first();
+        $Cliente = Cliente::where('usuario', '=', $request->usuario)->where('estado', 'activo')->first();
 
-        if ($administradore && Hash::check($request->contrasena, $administradore->contrasena)) {
+        if ($Cliente && Hash::check($request->contrasena, $Cliente->contrasena)) {
 
-            Auth::guard('administradore')->login($administradore);
+            Auth::guard('administradore')->login($Cliente);
 
             $request->session()->regenerate();
 
