@@ -67,11 +67,5 @@ Route::get('/cliente/login', [ClienteAuthController::class, 'showForm'])->name('
 Route::post('/cliente/logout', [ClienteAuthController::class, 'logout']);
 // termina cliente login
 
-// TAREA DE PRODUCTOS API
-Route::get('/catalogo', [ApiProductosController::class, 'index']);
-Route::get('/catalogo/detalle{id}', [ApiProductosController::class, 'show']);
-// TERMINA TAREA DE PRODUCTOS API
-
-
 // pruebas
 Route::view('/login/estructura', '/login/seleccionarlogin');
