@@ -7,12 +7,15 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cliente;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1dc36f6e2ac01cf10f41994c0c447f89509a3e61
 class ClienteAuthController extends Controller
 {
     public function showForm()
     {
-        return view('/login/formulario');
+        return view('/login/logincliente');
     }
     public function login(Request $request): RedirectResponse
     {
@@ -26,7 +29,11 @@ class ClienteAuthController extends Controller
 
         if ($Cliente && Hash::check($request->contrasena, $Cliente->contrasena)) {
 
+<<<<<<< HEAD
             Auth::guard('cliente')->login($Cliente);
+=======
+            Auth::guard('administradore')->login($Cliente);
+>>>>>>> 1dc36f6e2ac01cf10f41994c0c447f89509a3e61
 
             $request->session()->regenerate();
 

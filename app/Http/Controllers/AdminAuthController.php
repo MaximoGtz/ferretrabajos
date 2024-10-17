@@ -13,7 +13,7 @@ class AdminAuthController extends Controller
 
     public function showForm()
     {
-        return view('/login/formulario');
+        return view('/login/loginadministrador');
     }
     public function login(Request $request): RedirectResponse
     {

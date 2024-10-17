@@ -1,26 +1,30 @@
 @extends('index')
 @section('title', 'Agregar Trabajador')
 @section('main_content')
-    <div class="flex justify-center items-center h-screen">
-        <div class="space-y-4 md:space-y-0 md:space-x-4 md:flex">
-            <a href="/login/clientes">
+<div class="max-w-md mx-auto flex flex-col items-center justify-center">
+    <!-- Contenido aquí -->
+
+
+
+        <div class="space-y-4 md:space-y-0 md:space-x-4 md:flex mb-8 mt-8">
+            <a href="/cliente/login">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Clientes
                 </button>
             </a>
-            <a href="/login/empleados">
+            <a href="/trabajador/login">
                 <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                    Empleados
+                    Trabajador
                 </button>
             </a>
-            <a href="/login/administradores">
+            <a href="/admin/login">
                 <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                    Administradores
+                    Admin
                 </button>
             </a>
         </div>
         <div
-            class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            class="w-full bg-gray-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     @yield('titulo_login')
