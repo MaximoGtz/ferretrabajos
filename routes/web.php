@@ -1,5 +1,5 @@
 <?php
-
+// este es mi cambio de ejemplo
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdministradoresController;
 use App\Http\Controllers\ClienteController;
