@@ -62,12 +62,14 @@
                     <span class="sr-only">Open user menu</span>
                     <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
                 </button>
-                <a href="/login"
+                <a href="/login/cliente">
 
-                    <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Iniciar sesión</button>
+                    <button type="button"
+                        class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Iniciar
+                        sesión</button>
                 </a>
-                    <!-- Dropdown menu -->
-                
+                <!-- Dropdown menu -->
+
                 <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
                     id="user-dropdown">
                     <div class="px-4 py-3 ">
@@ -90,7 +92,8 @@
                         <li>
                             <form action="/admin/logout" method="POST">
                                 @csrf
-                                <button type="submit" class="text-sm text-blue-600 dark:text-blue-500 hover:underline">Cerrar sesion
+                                <button type="submit"
+                                    class="text-sm text-blue-600 dark:text-blue-500 hover:underline">Cerrar sesion
                             </form>
                         </li>
                     </ul>
@@ -129,7 +132,8 @@
                     </li>
                     <li>
                         <a href="/catalogo"
-                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Tarea API</a>
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Tarea
+                            API</a>
                     </li>
                 </ul>
             </div>

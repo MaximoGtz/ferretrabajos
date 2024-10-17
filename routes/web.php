@@ -5,7 +5,7 @@ use App\Http\Controllers\AdministradoresController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiProductosController;
-
+use App\Http\Controllers\ClienteAuthController;
 
 // rutas compartidas
 Route::view('/inicio', '/compartidas/inicio');
@@ -14,9 +14,19 @@ Route::view('/servicios', '/compartidas/servicios');
 Route::view('/contacto', '/compartidas/contacto');
 // termina rutas comprartidas
 
-Route::get('/', function () {
-    return view('/login/formulario');
+// trabajando
+// Route::post('/login/admin', function () {
+//     return view('/login/formulario');
+// });
+Route::get('/login/cliente', function () {
+    return view('/login/logincliente');
 });
+Route::get('/login/trabajador', function () {
+    return view('/login/logintrabajador');
+});
+Route::view('/', '/compartidas/inicio');
+// termina trabajando
+
 
 
 Route::middleware(['auth:administradore'])->group(function () {
@@ -45,11 +55,17 @@ Route::middleware(['auth:administradore'])->group(function () {
 Route::view('/productos', '/tareapis/catalogo');
 Route::view('/productos/detalle', '/tareapis/detalle');
 
+// admin login
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::get('/admin/login', [AdminAuthController::class, 'showForm'])->name('login');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout']);
+// termina admin login
 
-// TAREA DE PRODUCTOS API
-Route::get('/catalogo', [ApiProductosController::class, 'index']);
-Route::get('/catalogo/detalle{id}', [ApiProductosController::class, 'show']);
-// TERMINA TAREA DE PRODUCTOS API
+// cliente login   ----trabajando
+Route::post('/cliente/login', [ClienteAuthController::class, 'login']);
+Route::get('/cliente/login', [ClienteAuthController::class, 'showForm'])->name('login');
+Route::post('/cliente/logout', [ClienteAuthController::class, 'logout']);
+// termina cliente login
+
+// pruebas
+Route::view('/login/estructura', '/login/seleccionarlogin');

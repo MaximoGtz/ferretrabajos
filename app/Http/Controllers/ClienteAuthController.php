@@ -4,16 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\administradore;
+use App\Models\Cliente;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
-
-class AdminAuthController extends Controller
+class ClienteAuthController extends Controller
 {
-
     public function showForm()
     {
-        return view('/login/loginadministrador');
+        return view('/login/logincliente');
     }
     public function login(Request $request): RedirectResponse
     {
@@ -23,11 +21,11 @@ class AdminAuthController extends Controller
         ]);
 
 
-        $administradore = administradore::where('usuario', '=', $request->usuario)->where('estado', 'activo')->first();
+        $Cliente = Cliente::where('usuario', '=', $request->usuario)->where('estado', 'activo')->first();
 
-        if ($administradore && Hash::check($request->contrasena, $administradore->contrasena)) {
+        if ($Cliente && Hash::check($request->contrasena, $Cliente->contrasena)) {
 
-            Auth::guard('administradore')->login($administradore);
+            Auth::guard('cliente')->login($Cliente);
 
             $request->session()->regenerate();
 
@@ -42,12 +40,12 @@ class AdminAuthController extends Controller
 
     public function logout(Request $request): RedirectResponse
     {
-        Auth::guard('administradore')->logout();
+        Auth::guard('cliente')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/admin/login');
+        return redirect('/cliente/login');
     }
 }
