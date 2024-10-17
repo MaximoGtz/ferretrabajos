@@ -16,12 +16,12 @@ class ClienteAuthController extends Controller
     public function login(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'usuario' => ['required'],
+            'email' => ['required', 'email'],
             'contrasena' => ['required'],
         ]);
 
 
-        $Cliente = Cliente::where('usuario', '=', $request->usuario)->where('estado', 'activo')->first();
+        $Cliente = Cliente::where('correo', '=', $request->email)->where('estado', 'activo')->first();
 
         if ($Cliente && Hash::check($request->contrasena, $Cliente->contrasena)) {
 
@@ -47,5 +47,31 @@ class ClienteAuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/cliente/login');
+    }
+
+    public function perfil()
+    {
+        $cliente = Auth::user(); // Obtener el cliente autenticado
+        return view('/vistas_cliente/perfil', compact('cliente'));
+    }
+
+    // Eliminar la cuenta del cliente y cerrar sesión
+    public function destroy($id)
+    {
+        $cliente = Cliente::findOrFail($id);
+
+        // Verificar que el usuario autenticado es el que se eliminará
+        if ($cliente->id !== Auth::id()) {
+            return redirect()->back()->with('errorBorrar', 'No tienes permisos para eliminar esta cuenta.');
+        }
+
+        // Eliminar la cuenta
+        $cliente->delete();
+
+        // Cerrar sesión
+        Auth::logout();
+
+        // Redirigir a la página de inicio con un mensaje
+        return redirect('/')->with('success', 'Tu cuenta ha sido eliminada correctamente.');
     }
 }

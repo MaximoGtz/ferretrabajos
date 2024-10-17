@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
-
+use Illuminate\Support\Facades\Hash;
 
 class ClienteController extends Controller
 {
@@ -26,12 +26,24 @@ class ClienteController extends Controller
     {
         $cliente = new Cliente();
 
+        $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'correo' => ['required', 'email', 'unique:clientes'],
+            'contrasena' => 'required',
+            'red_social' => 'required',
+            'imagen' => 'required',
+            'estado' => 'required',
+            'direccion' => 'required',
+            'telefono' => 'required'
 
+
+        ]);
         $cliente->id = $request->id;
         $cliente->nombre = $request->nombre;
         $cliente->apellido = $request->apellido;
         $cliente->correo = $request->correo;
-        $cliente->contraseña = $request->contraseña;
+        $cliente->contrasena = Hash::make($request->contrasena);
         $cliente->imagen = 'cliente_default.jpg';
         $cliente->estado = $request->estado;
         $cliente->red_social = $request->red_social;
@@ -67,12 +79,25 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
 
+        $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'correo' => ['required', 'email', 'unique:clientes'],
+            'contrasena' => 'required',
+            'red_social' => 'required',
+            'imagen' => 'required',
+            'estado' => 'required',
+            'direccion' => 'required',
+            'telefono' => 'required'
+
+
+        ]);
 
         $cliente->id = $request->id;
         $cliente->nombre = $request->nombre;
         $cliente->apellido = $request->apellido;
         $cliente->correo = $request->correo;
-        $cliente->contraseña = $request->contraseña;
+        $cliente->contrasena = $request->contrasensa;
         // $cliente->imagen=$request->imagen;
         $cliente->estado = $request->estado;
         $cliente->red_social = $request->red_social;
@@ -112,17 +137,24 @@ class ClienteController extends Controller
 
     public function destroy($id)
     {
-        $cliente = Cliente::find($id);
+        // $cliente = Cliente::find($id);
 
-        $cliente->estado = 'inactivo';
+        // $cliente->estado = 'inactivo';
 
+        // $cliente->delete();
+
+        // $cliente->save();
+
+        // return redirect('/cliente/listadoc');
+        $cliente = Cliente::findOrFail($id);
         $cliente->delete();
 
-        $cliente->save();
-
-        return redirect('/cliente/listadoc');
+        // Redirige o muestra un mensaje de éxito
+        return redirect()->route('cliente.index')->with('success', 'Cliente eliminado correctamente.');
 
 
     }
+
+    
 
 }

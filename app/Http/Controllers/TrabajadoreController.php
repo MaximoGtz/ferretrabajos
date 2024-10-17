@@ -31,13 +31,13 @@ class TrabajadoreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre'=>'required',
-            'apellido'=>'required',
-            'correo'=>['required', 'unique:trabajadores',],
-            'contrasena'=>'min:6|required_with:confirmar_contrasena|same:confirmar_contrasena',
-            'confirmar_contrasena'=>'required | min:6',
-            'rfc'=>'required',
-            'imagen'=>'required|image',
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'correo' => ['required', 'unique:trabajadores', 'email'],
+            'contrasena' => 'min:6|required_with:confirmar_contrasena|same:confirmar_contrasena',
+            'confirmar_contrasena' => 'required | min:6',
+            'rfc' => 'required',
+            'imagen' => 'required|image',
         ]);
         // $trabajadore = Trabajadore::create($request->all());
         // $trabajadore->save();
@@ -45,9 +45,9 @@ class TrabajadoreController extends Controller
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $destinationPath = 'imgs/trabajadores/';
-            $filename = time()."-".$file->getClientOriginalName();
+            $filename = time() . "-" . $file->getClientOriginalName();
             $uploadSuccess = $request->file('imagen')->move($destinationPath, $filename);
-            $trabajador->imagen= $destinationPath.$filename;
+            $trabajador->imagen = $destinationPath . $filename;
         }
         $trabajador->nombre = $request->nombre;
         $trabajador->apellido = $request->apellido;
@@ -88,19 +88,19 @@ class TrabajadoreController extends Controller
     {
         $request->validate([
             'nombre' => 'required',
-            'apellido' =>'required',
+            'apellido' => 'required',
             'correo' => 'required',
             'contrasena' => 'required',
             'rfc' => 'required',
-            'especialidad' =>'required'
+            'especialidad' => 'required'
         ]);
         if ($request->hasFile('imagen')) {
 
             $file = $request->file('imagen');
             $destinationPath = 'imgs/trabajadores/';
-            $filename = time()."-".$file->getClientOriginalName();
+            $filename = time() . "-" . $file->getClientOriginalName();
             $uploadSuccess = $request->file('imagen')->move($destinationPath, $filename);
-            $trabajadore->imagen= $destinationPath.$filename;
+            $trabajadore->imagen = $destinationPath . $filename;
         }
         $trabajadore->update($request->input());
         return redirect()->route('trabajadore.index')->with('success', 'Trabajador actualizado correctamente');

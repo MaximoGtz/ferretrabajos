@@ -4,7 +4,6 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdministradoresController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ApiProductosController;
 use App\Http\Controllers\ClienteAuthController;
 
 // rutas compartidas
@@ -41,13 +40,15 @@ Route::middleware(['auth:administradore'])->group(function () {
     Route::delete('/admin/borrar/{id}', [AdministradoresController::class, 'destroy']);
     // termina parte de jair
     // parte de juan
-    Route::get('/cliente/listadoc', [ClienteController::class, 'index']);
+    Route::get('/cliente/listadoc', [ClienteController::class, 'index'])->name('cliente.index');
     Route::get('/cliente/crearc', [ClienteController::class, 'create']);
     Route::post('/cliente/guardar', [ClienteController::class, 'store']);
     Route::get('/cliente/editar/{id}', [ClienteController::class, 'edit']);
     Route::put('/cliente/actualizar/{id}', [ClienteController::class, 'update']);
     Route::get('/cliente/mostrar/{id}', [ClienteController::class, 'show']);
-    Route::delete('/cliente/borrar/{id}', [ClienteController::class, 'destroy']);
+    // Route::delete('/cliente/borrar/{id}', [ClienteController::class, 'destroy']);
+    Route::delete('/cliente/borrar/{id}', [ClienteController::class, 'destroy'])->name('cliente.destroy');
+
     // termina parte de juan
 
 
@@ -65,5 +66,7 @@ Route::get('/cliente/login', [ClienteAuthController::class, 'showForm'])->name('
 Route::post('/cliente/logout', [ClienteAuthController::class, 'logout']);
 // termina cliente login
 
-// pruebas
-Route::view('/login/estructura', '/login/seleccionarlogin');
+// trabajando
+Route::get('/cliente/perfil', [ClienteAuthController::class, 'perfil'])->name('cliente.perfil')->middleware('auth:cliente');
+Route::delete('/cliente/borrar/{id}', [ClienteAuthController::class, 'destroy'])->name('cliente.destroy')->middleware('auth:cliente');
+// termina trabajando

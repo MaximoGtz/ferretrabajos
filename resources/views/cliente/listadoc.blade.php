@@ -1,9 +1,10 @@
 @extends('index')
 @section('title', 'Agregar Trabajador')
 @section('main_content')
-    <a href="/cliente/crearc" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">NUEVO
+    <a href="/cliente/crearc"
+        class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">NUEVO
         CLIENTE</a>
-        
+
     @if (empty($clientes))
         <h2>NO HAY ELEMENTOS A MOSTRAR</h2>
     @else
@@ -26,25 +27,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                  @foreach ($clientes as $item)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="px-6 py-4">{{$item->id}}</td>
-                        <td class="px-6 py-4">{{$item->nombre}}</td>
-                        <td class="px-6 py-4">{{$item->apellido}}</td> 
-                        <td class="px-6 py-4">{{$item->correo}}</td>
-                        <td class="px-6 py-4">{{$item->contraseña}}</td>
-                        <td class="px-6 py-4"><img width="100px" src="{{$item->imagen}}" alt="{{$item->imagen}}"></td>
-                        <td class="px-6 py-4">{{$item->estado}}</td>
-                        <td class="px-6 py-4">{{$item->red_social}}</td>
-                        <td class="px-6 py-4">{{$item->verificacion}}</td>
-                        <td class="px-6 py-4">{{$item->direccion}}</td>
-                        <td class="px-6 py-4">{{$item->telefono}}</td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="/cliente/editar/{{$item->id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-                            <a href="/cliente/mostrar/{{$item->id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Borrar</a>
-                        </td>
-                    </tr>
-                  @endforeach
+                    @foreach ($clientes as $item)
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4">{{ $item->id }}</td>
+                            <td class="px-6 py-4">{{ $item->nombre }}</td>
+                            <td class="px-6 py-4">{{ $item->apellido }}</td>
+                            <td class="px-6 py-4">{{ $item->correo }}</td>
+                            <td class="px-6 py-4">{{ $item->contraseña }}</td>
+                            <td class="px-6 py-4"><img width="100px" src="{{ $item->imagen }}" alt="{{ $item->imagen }}">
+                            </td>
+                            <td class="px-6 py-4">{{ $item->estado }}</td>
+                            <td class="px-6 py-4">{{ $item->red_social }}</td>
+                            <td class="px-6 py-4">{{ $item->verificacion }}</td>
+                            <td class="px-6 py-4">{{ $item->direccion }}</td>
+                            <td class="px-6 py-4">{{ $item->telefono }}</td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="/cliente/editar/{{ $item->id }}"
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                                <form id="frm_{{ $item->id }}" method="POST"
+                                    action="{{ route('cliente.destroy', $item->id) }}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit"
+                                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

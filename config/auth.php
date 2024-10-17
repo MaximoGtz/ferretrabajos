@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'administradores',  // El proveedor debe coincidir con el de 'providers'
         ],
+        'cliente' => [  // Este es el guard que estás usando en tu código
+            'driver' => 'session',
+            'provider' => 'clientes',  // El proveedor debe coincidir con el de 'providers'
+        ],
     ],
 
     /*
@@ -69,9 +73,13 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
         'administradores' => [  // Asegúrate de tener este proveedor para el guard 'administradores'
-        'driver' => 'eloquent',
-        'model' => App\Models\Administradore::class,  // Debe apuntar a tu modelo 'Administradore'
-    ],
+            'driver' => 'eloquent',
+            'model' => App\Models\Administradore::class,  // Debe apuntar a tu modelo 'Administradore'
+        ],
+        'clientes' => [  // Asegúrate de tener este proveedor para el guard 'administradores'
+            'driver' => 'eloquent',
+            'model' => App\Models\Cliente::class,  // Debe apuntar a tu modelo 'Administradore'
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
