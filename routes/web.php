@@ -52,8 +52,6 @@ Route::middleware(['auth:administradore'])->group(function () {
 
 
 });
-Route::view('/productos', '/tareapis/catalogo');
-Route::view('/productos/detalle', '/tareapis/detalle');
 
 // admin login
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
