@@ -56,9 +56,10 @@ class ClienteAuthController extends Controller
     }
 
     // Eliminar la cuenta del cliente y cerrar sesión
-    public function destroy($id)
+    public function destroy2($id)
     {
         $cliente = Cliente::findOrFail($id);
+
 
         // Verificar que el usuario autenticado es el que se eliminará
         if ($cliente->id !== Auth::id()) {

@@ -21,7 +21,7 @@
 
             <div class="mt-6 flex justify-center">
                 <!-- Botón para borrar cuenta -->
-                <form action="{{ route('cliente.destroy', $cliente->id) }}" method="POST"
+                <form action="{{ route('cliente.destroy2', $cliente->id) }}" method="POST"
                     onsubmit="return confirm('¿Estás seguro de que deseas eliminar tu cuenta?');">
                     @csrf
                     @method('DELETE')

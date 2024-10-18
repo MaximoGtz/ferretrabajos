@@ -68,5 +68,5 @@ Route::post('/cliente/logout', [ClienteAuthController::class, 'logout']);
 
 // trabajando
 Route::get('/cliente/perfil', [ClienteAuthController::class, 'perfil'])->name('cliente.perfil')->middleware('auth:cliente');
-Route::delete('/cliente/borrar/{id}', [ClienteAuthController::class, 'destroy'])->name('cliente.destroy')->middleware('auth:cliente');
+Route::delete('/cliente/borra2/{id}', [ClienteAuthController::class, 'destroy2'])->name('cliente.destroy2')->middleware('auth:cliente');
 // termina trabajando

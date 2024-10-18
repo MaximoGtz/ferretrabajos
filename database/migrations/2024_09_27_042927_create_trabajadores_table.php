@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('correo');
+            $table->string('correo')->unique();
             $table->string('contrasena');
-            $table->string('rfc');
+            $table->string('correo_confirmacion');
+            $table->string('rfc')->unique();
             $table->string('especialidad');
             $table->string('imagen');
             $table->timestamps();
