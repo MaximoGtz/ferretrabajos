@@ -5,12 +5,16 @@ use App\Http\Controllers\AdministradoresController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteAuthController;
-
+use Illuminate\Support\Facades\Auth;
 // rutas compartidas
 Route::view('/inicio', '/compartidas/inicio');
 Route::view('/nosotros', '/compartidas/nosotros');
 Route::view('/servicios', '/compartidas/servicios');
 Route::view('/contacto', '/compartidas/contacto');
+
+
+
+
 // termina rutas comprartidas
 
 // trabajando
