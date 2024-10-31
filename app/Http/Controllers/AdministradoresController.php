@@ -13,9 +13,6 @@ class AdministradoresController extends Controller
 {
   public function index()
   {
-    // $this->authorize('viewAny');
-    administradore::authorize('viewAny');
-    // $administradores=administradore::all();
     $administradores = administradore::where('estado', '=', 'activo')->get();
     return view('/administrador/listado')->with('administradores', $administradores);
   }
