@@ -55,19 +55,32 @@
             </a>
             {{-- AQUI EMPIEZA EL DROPDOWN --}}
             <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                
+                @if(auth()->check())
+    <button>Botón para usuarios autenticados</button>
+@else
+    <button>Botón para visitantes</button>
+@endif 
+                <a href="/login/cliente">
+                    
+                    <button type="button"
+                    class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Iniciar
+                    sesión</button>
+                </a>
+                
+                    
+                
                 <button type="button"
                     class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                     data-dropdown-placement="bottom">
                     <span class="sr-only">Open user menu</span>
-                    <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
-                </button>
-                <a href="/login/cliente">
+                    {{-- <img class="w-8 h-8 rounded-full" src="{{auth()->user()->imagen}}" alt="user photo"> --}}
 
-                    <button type="button"
-                        class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Iniciar
-                        sesión</button>
-                </a>
+
+                    <img class="w-8 h-8 rounded-full" src="/ejemplo" alt="user photo">
+                </button>
+
                 <!-- Dropdown menu -->
 
                 <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
