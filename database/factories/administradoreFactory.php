@@ -23,7 +23,7 @@ class administradoreFactory extends Factory
             'nombre' => 'admin',
             'apellido' => '',
             'usuario' => 'admin@gmail.com',
-            'rol' => 'jefe',
+            'rol' => 'superadmin',
             'imagen' => 'imagen',
             'estado' => 'activo',
             // 'email_verified_at' => now(),

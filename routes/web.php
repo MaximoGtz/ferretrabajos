@@ -30,11 +30,12 @@ Route::view('/contacto', '/compartidas/contacto');
     });
     Route::view('/', '/compartidas/inicio');
     
-    Route::get('/trabajadores/ver', [TrabajadoreController::class, 'indexPublic']);
     // termina trabajando
     
     
     Route::middleware(['auth:administradore'])->group(function () {
+        // Route::get('/trabajadores/ver', [TrabajadoreController::class, 'indexPublic']);
+        Route::get('/trabajadores/ver', [TrabajadoreController::class, 'indexPublic']);
         Route::view('/nosotros', '/compartidas/nosotros');
         Route::view('/servicios', '/compartidas/servicios');
         Route::view('/contacto', '/compartidas/contacto');

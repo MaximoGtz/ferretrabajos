@@ -42,12 +42,21 @@ class TrabajadoreController extends Controller
         // $trabajadore = Trabajadore::create($request->all());
         // $trabajadore->save();
         $trabajador = new Trabajadore();
+        // if ($request->hasFile('imagen')) {
+        //     $file = $request->file('imagen');
+        //     $destinationPath = 'imgs/trabajadores/';
+        //     $filename = time() . "-" . $file->getClientOriginalName();
+        //     $uploadSuccess = $request->file('imagen')->move($destinationPath, $filename);
+        //     $trabajador->imagen = $destinationPath . $filename;
+        // }
         if ($request->hasFile('imagen')) {
-            $file = $request->file('imagen');
-            $destinationPath = 'imgs/trabajadores/';
-            $filename = time() . "-" . $file->getClientOriginalName();
-            $uploadSuccess = $request->file('imagen')->move($destinationPath, $filename);
-            $trabajador->imagen = $destinationPath . $filename;
+            $img = $request->imagen;
+            $nuevo = 'trabajador_' . $trabajador->id . '.' . $img->extension();
+            $ruta = $img->storeAs('imagen/trabajadores', $nuevo, 'public');
+            $ruta = 'storage/' . $ruta;
+            $trabajador->imagen = asset($ruta);
+            $trabajador->save();
+
         }
         $trabajador->nombre = $request->nombre;
         $trabajador->apellido = $request->apellido;

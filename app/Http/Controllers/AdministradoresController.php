@@ -98,9 +98,11 @@ class AdministradoresController extends Controller
     $administradore = Administradore::find($id);
     return view('/administrador/mostrar')->with('administradore', $administradore);
   }
-
+  
   public function destroy($id, administradore $administradore)
   {
+    Gate::authorize('delete', $administradore);
+
     //dd($request->all());
 
     // $administradore->estado = 'inactivo';
