@@ -72,6 +72,13 @@ class TrabajadoreController extends Controller
     {
         //
     }
+    public function indexPublic()
+    {
+        $trabajadores = Trabajadore::all();
+        return view('compartidas.trabajadores', compact('trabajadores'));
+        // return $trabajadores;
+    }
+
 
     /**
      * Show the form for editing the specified resource.

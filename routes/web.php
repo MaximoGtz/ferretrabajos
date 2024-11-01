@@ -2,6 +2,7 @@
 // este es mi cambio de ejemplo
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdministradoresController;
+use App\Http\Controllers\TrabajadoreController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteAuthController;
@@ -28,8 +29,9 @@ Route::view('/contacto', '/compartidas/contacto');
         return view('/login/logintrabajador');
     });
     Route::view('/', '/compartidas/inicio');
-    // termina trabajando
     
+    Route::get('/trabajadores/ver', [TrabajadoreController::class, 'indexPublic']);
+    // termina trabajando
     
     
     Route::middleware(['auth:administradore'])->group(function () {
