@@ -29,4 +29,8 @@ class administradorePolicy
     {
         return $administradore->rol == "superadmin";
     }
+    public function create(administradore $administradore)
+    {
+        return $administradore->rol == "superadmin";
+    }
 }
