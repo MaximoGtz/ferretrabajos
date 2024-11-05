@@ -29,7 +29,7 @@ class ClienteAuthController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect()->intended('/inicio');
+            return redirect()->intended('/');
         }
 
 
