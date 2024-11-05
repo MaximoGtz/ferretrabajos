@@ -115,4 +115,10 @@ class AdministradoresController extends Controller
     return redirect('/admin/listado');
   }
 
+
+  // solo vistas
+  public function inicioView(){
+    
+  }
+  // termina solo vistas
 }

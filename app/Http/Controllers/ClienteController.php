@@ -155,6 +155,13 @@ class ClienteController extends Controller
 
     }
 
+
+    // solo vistas
+    public function inicioView(){
+        
+    }
+    // termina solo vistas
+
     
 
 }

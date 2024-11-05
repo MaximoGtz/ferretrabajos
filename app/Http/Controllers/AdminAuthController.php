@@ -23,7 +23,7 @@ class AdminAuthController extends Controller
         ]);
 
 
-        $administradore = administradore::where('usuario', '=', $request->usuario)->where('estado', 'activo')->first();
+        $administradore = administradore::where('usuario', '=', $request->usuario)->first(); /*->where('estado', 'activo')->first()*/
 
         if ($administradore && Hash::check($request->contrasena, $administradore->contrasena)) {
 
