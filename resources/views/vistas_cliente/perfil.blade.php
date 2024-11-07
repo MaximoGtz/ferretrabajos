@@ -4,7 +4,7 @@
     <div class="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6 my-5">
         <div class="flex items-center justify-center ">
             <!-- Imagen del perfil -->
-            <img class="w-24 h-24 rounded-full" src="{{ $cliente->profile_photo_url }}" alt="Foto de perfil del cliente">
+            <img class="w-24 h-24 rounded-full" src="{{ auth()->user()->imagen }}" alt="Foto de perfil del cliente">
         </div>
 
         <div class="mt-4">

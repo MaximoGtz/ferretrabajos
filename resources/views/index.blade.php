@@ -81,49 +81,76 @@
                         {{-- <img class="w-8 h-8 rounded-full" src="{{auth()->user()->imagen}}" alt="user photo"> --}}
 
 
-                        <img class="w-8 h-8 rounded-full" src="/ejemplo" alt="user photo">
+                        <img class="w-8 h-8 rounded-full" src="{{ auth()->user()->imagen }}" alt="user photo">
+                    </button>
+                    <!-- Dropdown menu -->
+
+                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                        id="user-dropdown">
+                        <div class="px-4 py-3 ">
+                            <span class="block text-sm text-gray-900 dark:text-white">
+                                @if (auth('administradore')->check())
+                                    Administrador
+                                @elseif(auth('cliente')->check())
+                                    Cliente
+                                @elseif(auth('trabajadore')->check())
+                                    Trabajador
+                                @endif
+                            </span>
+                            <span
+                                class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{ auth()->user()->nombre }}</span>
+                        </div>
+                        <ul class="py-2" aria-labelledby="user-menu-button">
+                            @if (auth('administradore')->check())
+                                <li>
+                                    <a href="/cliente/listadoc"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Clientes</a>
+                                </li>
+                                <li>
+                                    <a href="/trabajadore"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Trabajadores</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/listado"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Administradores</a>
+                                </li>
+                            @elseif(auth('cliente')->check())
+                                <li>
+                                    <a href="/cliente/perfil"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Perfil</a>
+                                </li>
+                                <li>
+                                    <a href="/cliente/contratos"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Contratos</a>
+                                </li>
+                                <li>
+                                    <a href="/cliente/notificaciones"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Notificaciones</a>
+                                </li>
+                            @elseif(auth('trabajadore')->check())
+                                Trabajador
+                                PENDIENTE
+                            @endif
+                            <li>
+                                <form action="/admin/logout" method="POST">
+                                    @csrf
+                                    <button type="submit"
+                                        class="text-sm text-blue-600 dark:text-blue-500 hover:underline">Cerrar sesion
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <button data-collapse-toggle="navbar-user" type="button"
+                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        aria-controls="navbar-user" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 17 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 1h15M1 7h15M1 13h15" />
+                        </svg>
                     </button>
                 @endauth
-                <!-- Dropdown menu -->
-
-                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-                    id="user-dropdown">
-                    <div class="px-4 py-3 ">
-                        <span class="block text-sm text-gray-900 dark:text-white">Administrador</span>
-                        <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">Maximo Gutierrez</span>
-                    </div>
-                    <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li>
-                            <a href="/cliente/listadoc"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Clientes</a>
-                        </li>
-                        <li>
-                            <a href="/trabajadore"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Trabajadores</a>
-                        </li>
-                        <li>
-                            <a href="/admin/listado"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Administradores</a>
-                        </li>
-                        <li>
-                            <form action="/admin/logout" method="POST">
-                                @csrf
-                                <button type="submit"
-                                    class="text-sm text-blue-600 dark:text-blue-500 hover:underline">Cerrar sesion
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                <button data-collapse-toggle="navbar-user" type="button"
-                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                    aria-controls="navbar-user" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 1h15M1 7h15M1 13h15" />
-                    </svg>
-                </button>
             </div>
             {{-- AQUI TERMINA EL DROPDOWN --}}
 
