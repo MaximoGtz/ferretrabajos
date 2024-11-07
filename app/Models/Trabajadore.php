@@ -18,4 +18,7 @@ class Trabajadore extends Model
     {
         return $this->belongsTo(Categoria::class);
     }
+    // public function carritos(){
+    //     return $this->hasMany(Carrito::class);
+    // }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Models\Carrito;
+use App\Models\TrabajadoresCarrito;
 use Illuminate\Support\Facades\Hash;
 
 class ClienteController extends Controller
@@ -157,11 +159,14 @@ class ClienteController extends Controller
 
 
     // solo vistas
-    public function inicioView(){
-        
+    public function verContrato()
+    {
+        $user = auth()->user();
+        return view('vistas_cliente.contrato', compact('user'));
     }
     // termina solo vistas
-
-    
+    public function agregarACarrito(Request $request)
+    {
+return "hekllo";
 
 }

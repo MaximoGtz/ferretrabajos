@@ -24,4 +24,7 @@ class Cliente extends Authenticatable
         'direccion',
         'telefono'
     ];
+    public function Contrato(){
+        return $this->hasMany(Contrato::class);
+    }
 }

@@ -84,5 +84,8 @@ Route::middleware(['auth:cliente'])->group(function () {
     Route::view('/nosotros/cliente', '/compartidas/nosotros')->name('nosotros.cliente');
     Route::view('/servicios/cliente', '/compartidas/servicios')->name('servicios.cliente');
     Route::view('/contacto/cliente', '/compartidas/contacto')->name('contacto.cliente');
+    Route::get('cliente/contrato', [ClienteController::class, 'verContrato']);
     Route::get('/trabajadores/cliente', [TrabajadoreController::class, 'indexPublic']);
+    Route::post('/cliente/agregar-producto', [ClienteController::class, 'agregarACarrito']);
+
 });
