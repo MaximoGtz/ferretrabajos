@@ -39,8 +39,6 @@ class TrabajadoreController extends Controller
             'rfc' => 'required',
             'imagen' => 'required|image',
         ]);
-        // $trabajadore = Trabajadore::create($request->all());
-        // $trabajadore->save();
         $trabajador = new Trabajadore();
         // if ($request->hasFile('imagen')) {
         //     $file = $request->file('imagen');

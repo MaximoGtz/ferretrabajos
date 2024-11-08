@@ -24,7 +24,10 @@ class Cliente extends Authenticatable
         'direccion',
         'telefono'
     ];
-    public function Contrato(){
+    public function contratos(){
         return $this->hasMany(Contrato::class);
+    }
+    public function carrito(){
+        return $this->hasOne(Carrito::class);
     }
 }

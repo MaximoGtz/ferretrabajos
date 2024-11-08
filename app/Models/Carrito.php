@@ -4,16 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Cliente;
 class Carrito extends Model
 {
     use HasFactory;
-    public function Contrato()
+    protected $fillable = [
+        'cliente_id',
+        'total',
+    ];
+    
+    public function contrato()
     {
         return $this->belongsTo(Contrato::class);
     }
-    public function Trabajadores()
+    public function trabajadores()
     {
-        return $this->hasMany(Trabajadore::class);
+        // haciendole caso a chat
+        return $this->belongsToMany(Trabajadore::class, 'carrito_trabajador');
     }
 }

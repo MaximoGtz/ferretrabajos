@@ -10,13 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('trabajadores_carrito', function (Blueprint $table) {
+        Schema::create('carritos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('carrito_id');
-            $table->foreign('carrito_id')->references('id')->on('carritos')->onDelete('cascade');
-            $table->unsignedBigInteger('trabajador_id');
-            $table->foreign('trabajador_id')->references('id')->on('trabajadores')->onDelete('cascade');
-
+            $table->unsignedBigInteger('contrato_id')->unique();
+            $table->foreign('contrato_id')->references('id')->on('contratos')->onDelete('cascade');
             $table->timestamps();
         });
     }

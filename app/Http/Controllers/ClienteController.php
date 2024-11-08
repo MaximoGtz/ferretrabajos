@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Models\Trabajadore;
 use App\Models\Carrito;
 use App\Models\TrabajadoresCarrito;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Auth;
 class ClienteController extends Controller
 {
 
@@ -62,8 +63,7 @@ class ClienteController extends Controller
             $ruta = 'storage/' . $ruta;
             $cliente->imagen = asset($ruta);
             $cliente->save();
-
-        }
+        };
 
 
         return redirect('/cliente/listadoc');
@@ -74,7 +74,6 @@ class ClienteController extends Controller
 
         $cliente = Cliente::find($id);
         return view('/cliente/editar')->with('cliente', $cliente);
-
     }
 
     public function update(Request $request, $id)
@@ -117,12 +116,10 @@ class ClienteController extends Controller
             $ruta = 'storage/' . $ruta;
             $cliente->imagen = asset($ruta);
             $cliente->save();
-
-        }
+        };
 
 
         return redirect('/cliente/listadoc');
-
     }
 
     public function show($id)
@@ -133,8 +130,6 @@ class ClienteController extends Controller
 
 
         return view('/cliente/mostrar')->with('cliente', $cliente);
-
-
     }
 
     public function destroy($id)
@@ -153,20 +148,56 @@ class ClienteController extends Controller
 
         // Redirige o muestra un mensaje de éxito
         return redirect()->route('cliente.index')->with('success', 'Cliente eliminado correctamente.');
-
-
     }
 
 
     // solo vistas
     public function verContrato()
     {
-        $user = auth()->user();
+        $user = Auth::user();
         return view('vistas_cliente.contrato', compact('user'));
     }
-    // termina solo vistas
-    public function agregarACarrito(Request $request)
-    {
-return "hekllo";
 
+
+public function contratar_trabajador(Request $request ){
+    // Validar que el ID de producto esté en la solicitud
+    $request->validate([
+        'trabajador_id' => 'required|exists:trabajadores,id',
+    ]);
+
+    $user = Auth::user();
+    // Obtener el cliente
+    $cliente = Cliente::findOrFail($user->id);
+    // Obtener o crear la última orden del cliente
+    $contrato = $cliente->contratos()->latest()->first();
+    if (!$contrato) {
+        $contrato = $cliente->contratos()->create([
+            // agregar cualquier dato necesario de la orden
+        ]);
+    }
+    $carrito = $contrato->carrito;
+    if (!$carrito) {
+        $carrito = $contrato->carrito()->create([
+
+        ]);
+    }
+
+    $trabajador = Trabajadore::findOrFail($request->trabajador_id);
+    // Obtener el trabajador
+    $trabajadorId = $request->trabajador_id;
+
+    // Añadir el trabajador al carrito (evita duplicados automáticamente)
+    $carrito->trabajadores()->syncWithoutDetaching([$trabajadorId]);
+
+    return response()->json([
+        'message' => 'Producto añadido al carrito exitosamente.',
+        'carrito' => $carrito->load('trabajadores'), // Cargar los productos del carrito para confirmación
+    ]);
+}
+
+    // termina solo vistas
+    //     public function agregarACarrito(Request $request)
+    //     {
+    // return "hekllo";
+    //     }
 }

@@ -13,12 +13,11 @@ return new class extends Migration {
         Schema::create('contratos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cliente_id');
-            $table->unsignedBigInteger('carrito_id');
             $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
-            $table->foreign('carrito_id')->references('id')->on('carritos')->onDelete('cascade');
-            $table->string('fecha_cita');
-            $table->string('descripcion');
-            $table->string('order_number');
+            $table->string('fecha_cita')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->string('estado')->nullable();
+            $table->double('costo', 8, 2)->nullable(); // 8 dígitos en total, 2 de ellos después del punto decimal
             $table->timestamps();
         });
     }
@@ -28,6 +27,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('contratos');
+        Schema::table('contratos', function (Blueprint $table) {
+            $table->dropColumn('contrato_id');
+        });
     }
 };

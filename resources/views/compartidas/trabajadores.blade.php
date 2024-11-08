@@ -4,7 +4,7 @@
 <style>
     .imagenTarjeta{
         width: 100%;
-        height: 200px;
+        
     }
 </style>
 <div class="max-w-full mx-auto p-4">
@@ -20,11 +20,30 @@
                 <h2 class="text-lg font-semibold">{{$trabajador->nombre}}</h2>
                 <p class="text-gray-500">Categoría: {{$trabajador->especialidad}}</p>
                 <p class="text-gray-600 mb-4">Descripción breve del producto 1. Este producto es excelente. {{ $trabajador->imagen }}</p>
-                <a href="/contrato/{{$trabajador->id}}" class="text-blue-500 hover:underline">
-                    <button class="w-full bg-green-500 text-white font-bold py-2 rounded hover:bg-green-600 transition duration-300">
-                        Contratar
-                    </button>
-                </a>
+                
+                
+                @if (auth('administradore')->check())
+                                    Administrador
+                                @elseif(auth('cliente')->check())
+                                    <form action="{{ route('clientes.contratar_trabajador', $trabajador->id) }}" method="POST">
+                                        @csrf <!-- Token CSRF para seguridad -->
+                                        <input type="hidden" name="trabajador_id" value="{{ $trabajador->id }}">
+                                        <button type="submit" class="w-full bg-green-500 text-white font-bold py-2 rounded hover:bg-green-600 transition duration-300">
+                                            Contratar como cliente
+                                        </button>
+                                    </form>
+                                {{-- @elseif(auth('trabajadore')->check())
+                                    Trabajador
+                             --}}
+                                @else
+                                <a href="/cliente/login" class="text-blue-500 hover:underline">
+                                    <button class="w-full bg-green-500 text-white font-bold py-2 rounded hover:bg-green-600 transition duration-300">
+                                        Contratar
+                                    </button>
+                                </a>
+                                @endif
+                esto es una prueba
+
 
             </div>
         </div>

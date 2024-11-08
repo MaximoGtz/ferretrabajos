@@ -18,28 +18,20 @@ Route::get('/trabajadores/ver', [VistasCompartidasController::class, 'trabajador
 
 
 
-// INICIA LOGINS
-Route::get('/login/cliente', function () {
-    return view('/login/logincliente');
-})->middleware('guest');
-
-Route::get('/login/trabajador', function () {
-    return view('/login/logintrabajador');
-})->middleware('guest');
-// TERMINA LOGINS
-
-
 Route::middleware(['auth:administradore'])->group(function () {
+    // VISTAS COMPARTIDAS
     Route::view('/inicio/admin', '/compartidas/inicio')->name('inicio.admin');
     Route::view('/nosotros/admin', '/compartidas/nosotros')->name('nosotros.admin');
     Route::view('/servicios/admin', '/compartidas/servicios')->name('servicios.admin');
     Route::view('/contacto/admin', '/compartidas/contacto')->name('contacto.admin');
     Route::get('/trabajadores/admin', [TrabajadoreController::class, 'indexPublic']);
+    // TERMINA VISTAS COMPARTIDAS
 
-
+    // EMPIEZA TRABAJADORES
     Route::resource('trabajadore', App\Http\Controllers\TrabajadoreController::class);
+    // TERMINA TRABAJADORES
 
-    // EMPIEZA ADMINISTRADORES
+    // EMPIEZA ADMINISTRADORES CRUD
     Route::get('/admin/listado', [AdministradoresController::class, 'index']);
     Route::get('/admin/crear', [AdministradoresController::class, 'create']);
     Route::post('/admin/guardar', [AdministradoresController::class, 'store']);
@@ -47,9 +39,9 @@ Route::middleware(['auth:administradore'])->group(function () {
     Route::put('/admin/actualizar/{id}', [AdministradoresController::class, 'actualizar']);
     Route::get('/admin/mostrar/{id}', [AdministradoresController::class, 'mostrar']);
     Route::delete('/admin/borrar/{id}', [AdministradoresController::class, 'destroy']);
-    //TERMINA ADMINISTRADORES
+    //TERMINA ADMINISTRADORES CRUD
 
-    // EMPIEZA CLIENTES
+    // EMPIEZA CLIENTES CRUD
     Route::get('/cliente/listadoc', [ClienteController::class, 'index'])->name('cliente.index');
     Route::get('/cliente/crearc', [ClienteController::class, 'create']);
     Route::post('/cliente/guardar', [ClienteController::class, 'store']);
@@ -57,7 +49,7 @@ Route::middleware(['auth:administradore'])->group(function () {
     Route::put('/cliente/actualizar/{id}', [ClienteController::class, 'update']);
     Route::get('/cliente/mostrar/{id}', [ClienteController::class, 'show']);
     Route::delete('/cliente/borrar/{id}', [ClienteController::class, 'destroy'])->name('cliente.destroy');
-    // TERMINA CLIENTES
+    // TERMINA CLIENTES CRUD
 
 });
 
@@ -67,25 +59,34 @@ Route::get('/admin/login', [AdminAuthController::class, 'showForm'])->name('logi
 Route::post('/admin/logout', [AdminAuthController::class, 'logout']);
 // termina admin login
 
-// cliente login   ----trabajando
+// cliente login
 Route::post('/cliente/login', [ClienteAuthController::class, 'login']);
 Route::get('/cliente/login', [ClienteAuthController::class, 'showForm'])->name('login');
 Route::post('/cliente/logout', [ClienteAuthController::class, 'logout']);
 // termina cliente login
 
-// trabajando
-Route::get('/cliente/perfil', [ClienteAuthController::class, 'perfil'])->name('cliente.perfil')->middleware('auth:cliente');
-Route::delete('/cliente/borra2/{id}', [ClienteAuthController::class, 'destroy2'])->name('cliente.destroy2')->middleware('auth:cliente');
-// termina trabajando
-
 
 Route::middleware(['auth:cliente'])->group(function () {
+    // VISTAS COMPARTIDAS
     Route::view('/inicio/cliente', '/compartidas/inicio')->name('inicio.cliente');
     Route::view('/nosotros/cliente', '/compartidas/nosotros')->name('nosotros.cliente');
     Route::view('/servicios/cliente', '/compartidas/servicios')->name('servicios.cliente');
     Route::view('/contacto/cliente', '/compartidas/contacto')->name('contacto.cliente');
-    Route::get('cliente/contrato', [ClienteController::class, 'verContrato']);
     Route::get('/trabajadores/cliente', [TrabajadoreController::class, 'indexPublic']);
-    Route::post('/cliente/agregar-producto', [ClienteController::class, 'agregarACarrito']);
+    // TERMINA VISTAS COMPARTIDAS
+    // EMPIEZA FUNCIONES DE PERFIL
+    Route::get('/cliente/perfil', [ClienteAuthController::class, 'perfil'])->name('cliente.perfil');
+    Route::delete('/cliente/borra2/{id}', [ClienteAuthController::class, 'destroy2'])->name('cliente.destroy2');
+    // TERMINA FUNCIONES DE PERFIL
 
+    //CONTRATO Y CARRITO --trabajando
+    Route::get('cliente/contrato', [ClienteController::class, 'verContrato']);
+
+    //TERMINA CONTRATO Y CARRITO
+
+    // trabajando MAX
+    // Route::post('/cliente/agregar-producto', [ClienteController::class, 'agregarACarrito']);
+    Route::post('/cliente/contratar_trabajador', [ClienteController::class, 'contratar_trabajador'])->name('clientes.contratar_trabajador');
+
+    // termina trabajando MAX
 });

@@ -17,7 +17,7 @@ class ClientesTableSeeder extends Seeder
         Cliente::create([
             'nombre' => 'Juan',
             'apellido' => 'Pérez',
-            'correo' => 'juan.perez@example.com',
+            'correo' => 'maximo@cliente.com',
             'contrasena' => Hash::make('contrasena123'), // Asegúrate de hashear la contraseña
             'imagen' => 'ruta/a/la/imagen1.jpg',
         ]);

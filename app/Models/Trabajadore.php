@@ -18,7 +18,8 @@ class Trabajadore extends Model
     {
         return $this->belongsTo(Categoria::class);
     }
-    // public function carritos(){
-    //     return $this->hasMany(Carrito::class);
-    // }
+    public function carritos(){
+        // haciendole caso a chat
+        return $this->belongsToMany(Carrito::class, 'carrito_trabajador')->withTimestamps();
+    }
 }
