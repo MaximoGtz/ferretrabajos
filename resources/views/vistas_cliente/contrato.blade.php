@@ -24,11 +24,11 @@
             focus:ring-0 focus:border-gray-300 block w-full p-2.5 cursor-not-allowed" />
             <label for="user-id" class="block mb-2 text-sm font-medium text-gray-700 mt-4">Trabajadores</label>
             <ul class="space-y-4">
-                {{-- @foreach ($trabajadores as $trabajador) --}}
+                @foreach ($trabajadoresCarrito as $trabajador)
                 <li class="flex justify-between items-center bg-white border border-gray-300 rounded-lg p-4 shadow-sm">
                     <div>
-                        <p class="text-lg font-semibold text-gray-800">Maximo</p>
-                        <p class="text-sm text-gray-600">Categoría: Electrico</p>
+                        <p class="text-lg font-semibold text-gray-800">{{$trabajador->nombre}}</p>
+                        <p class="text-sm text-gray-600">Categoría: {{$trabajador->especialidad}}</p>
                     </div>
                     <form action="/hello" method="POST">
                         @csrf
@@ -37,7 +37,7 @@
                             class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2">Eliminar</button>
                     </form>
                 </li>
-                {{-- @endforeach --}}
+                @endforeach
             </ul>
         </div>
 

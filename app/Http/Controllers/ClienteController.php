@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Trabajadore;
 use App\Models\Carrito;
+use App\Models\Contrato;
 use App\Models\TrabajadoresCarrito;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -155,7 +156,22 @@ class ClienteController extends Controller
     public function verContrato()
     {
         $user = Auth::user();
-        return view('vistas_cliente.contrato', compact('user'));
+        $userId = Auth::id();
+        $cliente = Cliente::findOrFail($userId);
+        $contrato = $cliente->contratos()->latest()->first();
+        if (!$contrato) {
+            $contrato = $cliente->contratos()->create([
+                // agregar cualquier dato necesario de la orden
+            ]);
+        }
+        $carrito = $contrato->carrito;
+        if (!$carrito) {
+            $carrito = $contrato->carrito()->create([
+    
+            ]);
+        }
+        $trabajadoresCarrito = $carrito->trabajadores;
+        return view('vistas_cliente.contrato', compact('user', 'trabajadoresCarrito'));
     }
 
 
