@@ -10,6 +10,7 @@ use App\Models\Contrato;
 use App\Models\TrabajadoresCarrito;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+
 class ClienteController extends Controller
 {
 
@@ -166,54 +167,65 @@ class ClienteController extends Controller
         }
         $carrito = $contrato->carrito;
         if (!$carrito) {
-            $carrito = $contrato->carrito()->create([
-    
-            ]);
+            $carrito = $contrato->carrito()->create([]);
         }
         $trabajadoresCarrito = $carrito->trabajadores;
         return view('vistas_cliente.contrato', compact('user', 'trabajadoresCarrito'));
     }
 
 
-public function contratar_trabajador(Request $request ){
-    // Validar que el ID de producto esté en la solicitud
-    $request->validate([
-        'trabajador_id' => 'required|exists:trabajadores,id',
-    ]);
-
-    $user = Auth::user();
-    // Obtener el cliente
-    $cliente = Cliente::findOrFail($user->id);
-    // Obtener o crear la última orden del cliente
-    $contrato = $cliente->contratos()->latest()->first();
-    if (!$contrato) {
-        $contrato = $cliente->contratos()->create([
-            // agregar cualquier dato necesario de la orden
+    public function contratar_trabajador(Request $request)
+    {
+        // Validar que el ID de producto esté en la solicitud
+        $request->validate([
+            'trabajador_id' => 'required|exists:trabajadores,id',
         ]);
+
+        $user = Auth::user();
+        // Obtener el cliente
+        $cliente = Cliente::findOrFail($user->id);
+        // Obtener o crear la última orden del cliente
+        $contrato = $cliente->contratos()->latest()->first();
+        if (!$contrato) {
+            $contrato = $cliente->contratos()->create([
+                // agregar cualquier dato necesario de la orden
+            ]);
+        }
+        $carrito = $contrato->carrito;
+        if (!$carrito) {
+            $carrito = $contrato->carrito()->create([]);
+        }
+
+        $trabajador = Trabajadore::findOrFail($request->trabajador_id);
+        // Obtener el trabajador
+        $trabajadorId = $request->trabajador_id;
+
+        // Añadir el trabajador al carrito (evita duplicados automáticamente)
+        $carrito->trabajadores()->syncWithoutDetaching([$trabajadorId]);
+
+        return redirect()->route('cliente.verContrato')->with('success', 'Trabajador agregado correctamente');
+        
     }
-    $carrito = $contrato->carrito;
-    if (!$carrito) {
-        $carrito = $contrato->carrito()->create([
+    public function eliminar_trabajador($idTrabajador){
+        $user = Auth::user();
+        // Obtener el cliente
+        $cliente = Cliente::findOrFail($user->id);
+        // Obtener o crear la última orden del cliente
+        $contrato = $cliente->contratos()->latest()->first();
+        if (!$contrato) {
+            $contrato = $cliente->contratos()->create([
+                // agregar cualquier dato necesario de la orden
+            ]);
+        }
+        $carrito = $contrato->carrito;
+        if (!$carrito) {
+            $carrito = $contrato->carrito()->create([]);
+        }
 
-        ]);
+        // Eliminar el trabajador del carrito
+        $carrito->trabajadores()->detach($idTrabajador);
+
+        return redirect()->route('cliente.verContrato')->with('success', 'Trabajador eliminado correctamente');
     }
 
-    $trabajador = Trabajadore::findOrFail($request->trabajador_id);
-    // Obtener el trabajador
-    $trabajadorId = $request->trabajador_id;
-
-    // Añadir el trabajador al carrito (evita duplicados automáticamente)
-    $carrito->trabajadores()->syncWithoutDetaching([$trabajadorId]);
-
-    return response()->json([
-        'message' => 'Producto añadido al carrito exitosamente.',
-        'carrito' => $carrito->load('trabajadores'), // Cargar los productos del carrito para confirmación
-    ]);
-}
-
-    // termina solo vistas
-    //     public function agregarACarrito(Request $request)
-    //     {
-    // return "hekllo";
-    //     }
 }

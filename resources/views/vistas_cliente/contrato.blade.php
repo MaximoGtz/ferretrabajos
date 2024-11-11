@@ -26,11 +26,14 @@
             <ul class="space-y-4">
                 @foreach ($trabajadoresCarrito as $trabajador)
                 <li class="flex justify-between items-center bg-white border border-gray-300 rounded-lg p-4 shadow-sm">
+                    <div class="flex justify-center items-center p-4">
+                        <img src="{{$trabajador->imagen}}" alt="{{$trabajador->nombre}}" class="w-24 h-24 object-cover rounded" />
+                      </div>
                     <div>
                         <p class="text-lg font-semibold text-gray-800">{{$trabajador->nombre}}</p>
                         <p class="text-sm text-gray-600">Categoría: {{$trabajador->especialidad}}</p>
                     </div>
-                    <form action="/hello" method="POST">
+                    <form action="{{ route('clientes.eliminar_trabajador', $trabajador->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
