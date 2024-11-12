@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Contrato extends Model
 {   
     protected $fillable = [
-        'user_id',
+        'cliente_id',
         'fecha_cita',
         'descripcion',
-        'costo'
+        'costo',
+        'estado'
     ];
     use HasFactory;
     public function carrito(){

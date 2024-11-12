@@ -1,5 +1,5 @@
 @extends('index')
-@section('title', 'Agregar Trabajador')
+@section('title', 'Crear cliente')
 @section('main_content')
     <h1
         class="mb-4 text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">

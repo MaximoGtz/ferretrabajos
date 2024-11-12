@@ -1,5 +1,5 @@
 @extends('index')
-@section('title', 'Agregar Trabajador')
+@section('title', 'Inicio')
 @section('main_content')
 
 

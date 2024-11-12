@@ -1,5 +1,5 @@
 @extends('index')
-@section('title', 'Formulario Trabajador')
+@section('title', 'Trabajadores')
 @section('main_content')
 
     <h1 class="text-center py-5">

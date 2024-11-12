@@ -87,7 +87,8 @@ Route::middleware(['auth:cliente'])->group(function () {
     // trabajando MAX
     // Route::post('/cliente/agregar-producto', [ClienteController::class, 'agregarACarrito']);
     Route::post('/cliente/contratar_trabajador', [ClienteController::class, 'contratar_trabajador'])->name('clientes.contratar_trabajador');
-    Route::delete('/cliente/eliminar_trabajador', [ClienteController::class, 'eliminar_trabajador'])->name('clientes.eliminar_trabajador');
+    Route::delete('/cliente/eliminar_trabajador/{idTrabajador}', [ClienteController::class, 'eliminar_trabajador'])->name('clientes.eliminar_trabajador');
+    Route::post('/cliente/crear_contrato', [ClienteController::class, 'crear_contrato'])->name('clientes.crear_contrato');
 
     // termina trabajando MAX
 });

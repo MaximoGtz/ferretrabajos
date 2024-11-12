@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
             $table->string('fecha_cita')->nullable();
-            $table->string('descripcion')->nullable();
+            $table->string('descripcion', 500)->nullable(); 
             $table->string('estado')->nullable();
             $table->double('costo', 8, 2)->nullable(); // 8 dígitos en total, 2 de ellos después del punto decimal
             $table->timestamps();

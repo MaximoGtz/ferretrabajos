@@ -1,5 +1,5 @@
 @extends('index')
-@section('title', 'Agregar Trabajador')
+@section('title', 'Trabajadores')
 @section('main_content')
     <style>
         .imagenTarjeta {

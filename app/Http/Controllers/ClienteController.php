@@ -8,6 +8,7 @@ use App\Models\Trabajadore;
 use App\Models\Carrito;
 use App\Models\Contrato;
 use App\Models\TrabajadoresCarrito;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -170,7 +171,19 @@ class ClienteController extends Controller
             $carrito = $contrato->carrito()->create([]);
         }
         $trabajadoresCarrito = $carrito->trabajadores;
-        return view('vistas_cliente.contrato', compact('user', 'trabajadoresCarrito'));
+        // Obtener al cliente junto con su carrito y contar los trabajadores
+        // $cliente = Cliente::with('carrito.trabajadores')->findOrFail($userId);
+        $trabajadoresCount = $carrito->trabajadores->count();
+        $costo = 0;
+        if(!$trabajadoresCount){
+            $costo = 0;
+        }else{
+            for ($i=0; $i < $trabajadoresCount; $i++) { 
+                # code...
+                $costo += 400;
+            }
+        }
+        return view('vistas_cliente.contrato', compact('user', 'trabajadoresCarrito', 'trabajadoresCount', 'costo'));
     }
 
 
@@ -204,9 +217,9 @@ class ClienteController extends Controller
         $carrito->trabajadores()->syncWithoutDetaching([$trabajadorId]);
 
         return redirect()->route('cliente.verContrato')->with('success', 'Trabajador agregado correctamente');
-        
     }
-    public function eliminar_trabajador($idTrabajador){
+    public function eliminar_trabajador($idTrabajador)
+    {
         $user = Auth::user();
         // Obtener el cliente
         $cliente = Cliente::findOrFail($user->id);
@@ -227,5 +240,27 @@ class ClienteController extends Controller
 
         return redirect()->route('cliente.verContrato')->with('success', 'Trabajador eliminado correctamente');
     }
-
+    public function crear_contrato(Request $request){
+        $validates = $request->validate([
+            'cliente_id' => 'required | numeric',
+            'descripcion' => 'required|min:20',
+            'fecha_cita' => 'required|date',
+            'costo' => 'required | numeric',
+            'estado' => 'required | string'
+        ]);
+        $contrato = Contrato::create([
+            'cliente_id' => $validates['cliente_id'],
+            'fecha_cita' => $validates['fecha_cita'],
+            'descripcion' => $validates['descripcion'],
+            'costo' => $validates['costo'],
+            'estado' => $validates['estado']
+        ]);
+        $user = Auth::user();
+        // Obtener el cliente
+        $cliente = Cliente::findOrFail($user->id);
+        $contrato = $cliente->contratos()->latest()->first();
+        
+        $carrito = $contrato->carrito();
+        return redirect('inicio/cliente');
+    } 
 }
