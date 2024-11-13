@@ -6,15 +6,17 @@ use App\Http\Controllers\TrabajadoreController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteAuthController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VistasCompartidasController;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\ContactoController;
 
 Route::get('/', [VistasCompartidasController::class, 'inicio']);
 Route::get('/nosotros', [VistasCompartidasController::class, 'nosotros']);
 Route::get('/contacto', [VistasCompartidasController::class, 'contacto']);
 Route::get('/servicios', [VistasCompartidasController::class, 'servicios']);
 Route::get('/trabajadores/ver', [VistasCompartidasController::class, 'trabajadores']);
+
 
 
 
@@ -92,3 +94,13 @@ Route::middleware(['auth:cliente'])->group(function () {
 
     // termina trabajando MAX
 });
+
+//ruta paypal
+Route::post('pay',[PaymentController::class,'pay'])->name('payment');
+Route::get('success', [PaymentController::class, 'success']);
+Route::get('error', [PaymentController::class, 'error']);
+//termina paypal
+
+//ruta contacto
+Route::get('/contacto', [ContactoController::class, 'mostrarFormulario'])->name('contacto');
+Route::post('/contacto', [ContactoController::class, 'enviarFormulario'])->name('contacto.enviar');
