@@ -115,4 +115,5 @@ class VistasCompartidasController extends Controller
         $trabajadores = Trabajadore::all();
         return view('compartidas/trabajadores', compact('trabajadores'));
     }
+    
 }
