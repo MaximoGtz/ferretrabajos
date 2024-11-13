@@ -66,7 +66,8 @@ class ClienteController extends Controller
             $ruta = 'storage/' . $ruta;
             $cliente->imagen = asset($ruta);
             $cliente->save();
-        };
+        }
+        ;
 
 
         return redirect('/cliente/listadoc');
@@ -119,7 +120,8 @@ class ClienteController extends Controller
             $ruta = 'storage/' . $ruta;
             $cliente->imagen = asset($ruta);
             $cliente->save();
-        };
+        }
+        ;
 
 
         return redirect('/cliente/listadoc');
@@ -137,18 +139,8 @@ class ClienteController extends Controller
 
     public function destroy($id)
     {
-        // $cliente = Cliente::find($id);
-
-        // $cliente->estado = 'inactivo';
-
-        // $cliente->delete();
-
-        // $cliente->save();
-
-        // return redirect('/cliente/listadoc');
         $cliente = Cliente::findOrFail($id);
         $cliente->delete();
-
         // Redirige o muestra un mensaje de éxito
         return redirect()->route('cliente.index')->with('success', 'Cliente eliminado correctamente.');
     }
@@ -172,13 +164,12 @@ class ClienteController extends Controller
         }
         $trabajadoresCarrito = $carrito->trabajadores;
         // Obtener al cliente junto con su carrito y contar los trabajadores
-        // $cliente = Cliente::with('carrito.trabajadores')->findOrFail($userId);
         $trabajadoresCount = $carrito->trabajadores->count();
         $costo = 0;
-        if(!$trabajadoresCount){
+        if (!$trabajadoresCount) {
             $costo = 0;
-        }else{
-            for ($i=0; $i < $trabajadoresCount; $i++) { 
+        } else {
+            for ($i = 0; $i < $trabajadoresCount; $i++) {
                 # code...
                 $costo += 400;
             }
@@ -240,7 +231,8 @@ class ClienteController extends Controller
 
         return redirect()->route('cliente.verContrato')->with('success', 'Trabajador eliminado correctamente');
     }
-    public function crear_contrato(Request $request){
+    public function crear_contrato(Request $request)
+    {
         $validates = $request->validate([
             'cliente_id' => 'required | numeric',
             'descripcion' => 'required|min:20',
@@ -259,8 +251,15 @@ class ClienteController extends Controller
         // Obtener el cliente
         $cliente = Cliente::findOrFail($user->id);
         $contrato = $cliente->contratos()->latest()->first();
-        
+
         $carrito = $contrato->carrito();
         return redirect('inicio/cliente');
-    } 
+    }
+    public function ver_contratos($idCliente)
+    {
+        $userId = Auth::id();
+        $cliente = Cliente::findOrFail($userId);
+
+        return view('vistas_cliente.ver_contratos', compact('user', 'trabajadoresCarrito', 'trabajadoresCount', 'costo'));
+    }
 }

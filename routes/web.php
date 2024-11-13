@@ -79,16 +79,13 @@ Route::middleware(['auth:cliente'])->group(function () {
     Route::delete('/cliente/borra2/{id}', [ClienteAuthController::class, 'destroy2'])->name('cliente.destroy2');
     // TERMINA FUNCIONES DE PERFIL
 
-    //CONTRATO Y CARRITO --trabajando
+    //CONTRATO Y CARRITO
     Route::get('cliente/contrato', [ClienteController::class, 'verContrato'])->name('cliente.verContrato');
-
-    //TERMINA CONTRATO Y CARRITO
-
-    // trabajando MAX
-    // Route::post('/cliente/agregar-producto', [ClienteController::class, 'agregarACarrito']);
     Route::post('/cliente/contratar_trabajador', [ClienteController::class, 'contratar_trabajador'])->name('clientes.contratar_trabajador');
     Route::delete('/cliente/eliminar_trabajador/{idTrabajador}', [ClienteController::class, 'eliminar_trabajador'])->name('clientes.eliminar_trabajador');
     Route::post('/cliente/crear_contrato', [ClienteController::class, 'crear_contrato'])->name('clientes.crear_contrato');
-
+    //TERMINA CONTRATO Y CARRITO
+    // trabajando MAX
+    Route::post('/cliente/ver_contratos/{idCliente}', [ClienteController::class, 'ver_contratos'])->name('ver_contratos');
     // termina trabajando MAX
 });
