@@ -255,13 +255,13 @@ class ClienteController extends Controller
         $carrito = $contrato->carrito();
         return redirect('inicio/cliente');
     }
-    public function ver_contratos($idCliente)
-    {
-        $userId = Auth::id();
-        $cliente = Cliente::findOrFail($userId);
+    // public function ver_contratos($idCliente)
+    // {
+    //     $userId = Auth::id();
+    //     $cliente = Cliente::findOrFail($userId);
 
-        return view('vistas_cliente.ver_contratos', compact('user', 'trabajadoresCarrito', 'trabajadoresCount', 'costo'));
-    }
+    //     return view('vistas_cliente.ver_contratos', compact('user', 'trabajadoresCarrito', 'trabajadoresCount', 'costo'));
+    // }
     public function subir_contrato($requestInfo){
         
         $contrato = Contrato::create([
@@ -271,5 +271,11 @@ class ClienteController extends Controller
             'costo' => $requestInfo['costo'],
             'estado' => $requestInfo['estado']
         ]);
+    }
+    public function ver_contratos(){
+        $userId = Auth::id();
+        $cliente = Cliente::findOrFail($userId);
+        $contratos = $cliente->contratos()->latest()->get();
+        return view('vistas_cliente.ver_contratos', compact('contratos'));
     }
 }

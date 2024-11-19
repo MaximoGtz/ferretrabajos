@@ -19,6 +19,9 @@ Route::get('/trabajadores/ver', [VistasCompartidasController::class, 'trabajador
 
 
 
+Route::post('/registro/cliente/guardar', [ClienteController::class, 'store']);
+Route::get('/registro', [ClienteController::class, 'create']);
+
 
 Route::middleware(['auth:administradore'])->group(function () {
     // VISTAS COMPARTIDAS
@@ -88,7 +91,7 @@ Route::middleware(['auth:cliente'])->group(function () {
     Route::post('/cliente/crear_contrato', [ClienteController::class, 'crear_contrato'])->name('clientes.crear_contrato');
     //TERMINA CONTRATO Y CARRITO
     // trabajando MAX
-    Route::post('/cliente/ver_contratos/{idCliente}', [ClienteController::class, 'ver_contratos'])->name('ver_contratos');
+    Route::get('/cliente/ver_contratos', [ClienteController::class, 'ver_contratos'])->name('ver_contratos');
     // termina trabajando MAX
 });
 
