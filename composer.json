@@ -10,11 +10,9 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "league/omnipay": "^3.2",
-        "omnipay/paypal": "^3.0",
-        "paypal/rest-api-sdk-php": "^1.6",
-          "thephpleague/omnipay": "^3.0",
-    "thephpleague/omnipay-paypal": "^3.0"
+        "omnipay/paypal": "^3.0"
     },
+    
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",

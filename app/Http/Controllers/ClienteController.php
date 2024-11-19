@@ -262,4 +262,14 @@ class ClienteController extends Controller
 
         return view('vistas_cliente.ver_contratos', compact('user', 'trabajadoresCarrito', 'trabajadoresCount', 'costo'));
     }
+    public function subir_contrato($requestInfo){
+        
+        $contrato = Contrato::create([
+            'cliente_id' => $requestInfo['cliente_id'],
+            'fecha_cita' => $requestInfo['fecha_cita'],
+            'descripcion' => $requestInfo['descripcion'],
+            'costo' => $requestInfo['costo'],
+            'estado' => $requestInfo['estado']
+        ]);
+    }
 }

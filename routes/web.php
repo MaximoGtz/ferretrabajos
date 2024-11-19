@@ -93,7 +93,7 @@ Route::middleware(['auth:cliente'])->group(function () {
 });
 
 //ruta paypal
-Route::post('pay',[PaymentController::class,'pay'])->name('payment');
+Route::post('pay', [PaymentController::class, 'pay'])->name('payment');
 Route::get('success', [PaymentController::class, 'success']);
 Route::get('error', [PaymentController::class, 'error']);
 //termina paypal
@@ -101,3 +101,5 @@ Route::get('error', [PaymentController::class, 'error']);
 //ruta contacto
 Route::get('/contacto', [ContactoController::class, 'mostrarFormulario'])->name('contacto');
 Route::post('/contacto', [ContactoController::class, 'enviarFormulario'])->name('contacto.enviar');
+
+Route::post('/cliente/subir_contrato/{$requestInfo}', [ClienteController::class, 'subir_contrato'])->name('cliente.subir_contrato');
