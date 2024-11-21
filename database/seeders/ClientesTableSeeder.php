@@ -19,7 +19,7 @@ class ClientesTableSeeder extends Seeder
             'apellido' => 'Pérez',
             'correo' => 'maximo@cliente.com',
             'contrasena' => Hash::make('contrasena123'), // Asegúrate de hashear la contraseña
-            'imagen' => 'ruta/a/la/imagen1.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/14.jpeg',
         ]);
 
         Cliente::create([
@@ -27,7 +27,7 @@ class ClientesTableSeeder extends Seeder
             'apellido' => 'González',
             'correo' => 'maria.gonzalez@example.com',
             'contrasena' => Hash::make('contrasena123'),
-            'imagen' => 'ruta/a/la/imagen2.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/15.jpeg',
         ]);
 
         Cliente::create([
@@ -35,7 +35,7 @@ class ClientesTableSeeder extends Seeder
             'apellido' => 'López',
             'correo' => 'carlos.lopez@example.com',
             'contrasena' => Hash::make('contrasena123'),
-            'imagen' => 'ruta/a/la/imagen3.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/16.jpeg',
         ]);
 
         Cliente::create([
@@ -43,7 +43,7 @@ class ClientesTableSeeder extends Seeder
             'apellido' => 'Hernández',
             'correo' => 'ana.hernandez@example.com',
             'contrasena' => Hash::make('contrasena123'),
-            'imagen' => 'ruta/a/la/imagen4.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/17.jpeg',
         ]);
 
         Cliente::create([
@@ -51,7 +51,7 @@ class ClientesTableSeeder extends Seeder
             'apellido' => 'Martínez',
             'correo' => 'luis.martinez@example.com',
             'contrasena' => Hash::make('contrasena123'),
-            'imagen' => 'ruta/a/la/imagen5.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/18.jpeg',
         ]);
 
         Cliente::create([
@@ -59,7 +59,7 @@ class ClientesTableSeeder extends Seeder
             'apellido' => 'Ramírez',
             'correo' => 'sofia.ramirez@example.com',
             'contrasena' => Hash::make('contrasena123'),
-            'imagen' => 'ruta/a/la/imagen6.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/19.jpeg',
         ]);
 
         Cliente::create([
@@ -67,7 +67,7 @@ class ClientesTableSeeder extends Seeder
             'apellido' => 'Torres',
             'correo' => 'diego.torres@example.com',
             'contrasena' => Hash::make('contrasena123'),
-            'imagen' => 'ruta/a/la/imagen7.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/20.jpeg',
         ]);
 
         Cliente::create([
@@ -75,7 +75,7 @@ class ClientesTableSeeder extends Seeder
             'apellido' => 'Sánchez',
             'correo' => 'valeria.sanchez@example.com',
             'contrasena' => Hash::make('contrasena123'),
-            'imagen' => 'ruta/a/la/imagen8.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/140.jpeg',
         ]);
     }
 }

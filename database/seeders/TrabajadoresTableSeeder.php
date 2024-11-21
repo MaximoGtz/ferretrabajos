@@ -20,7 +20,7 @@ class TrabajadoresTableSeeder extends Seeder
             'contrasena' => Hash::make('contrasena123'), // Asegúrate de hashear la contraseña
             'rfc' => 'PEPJ800101XYZ',
             'especialidad' => 'Programador',
-            'imagen' => 'ruta/a/la/imagen1.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
         ]);
 
         Trabajadore::create([
@@ -30,7 +30,7 @@ class TrabajadoresTableSeeder extends Seeder
             'contrasena' => Hash::make('contrasena123'),
             'rfc' => 'GONM900202XYZ',
             'especialidad' => 'Diseñadora',
-            'imagen' => 'ruta/a/la/imagen2.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/3.jpeg',
         ]);
 
         Trabajadore::create([
@@ -40,7 +40,7 @@ class TrabajadoresTableSeeder extends Seeder
             'contrasena' => Hash::make('contrasena123'),
             'rfc' => 'LOPC900303XYZ',
             'especialidad' => 'Analista',
-            'imagen' => 'ruta/a/la/imagen3.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/5.jpeg',
         ]);
 
         Trabajadore::create([
@@ -50,7 +50,7 @@ class TrabajadoresTableSeeder extends Seeder
             'contrasena' => Hash::make('contrasena123'),
             'rfc' => 'HEAA900404XYZ',
             'especialidad' => 'Gerente',
-            'imagen' => 'ruta/a/la/imagen4.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/4.jpeg',
         ]);
 
         Trabajadore::create([
@@ -60,7 +60,7 @@ class TrabajadoresTableSeeder extends Seeder
             'contrasena' => Hash::make('contrasena123'),
             'rfc' => 'MALU900505XYZ',
             'especialidad' => 'Soporte Técnico',
-            'imagen' => 'ruta/a/la/imagen5.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/7.jpeg',
         ]);
 
         Trabajadore::create([
@@ -70,7 +70,7 @@ class TrabajadoresTableSeeder extends Seeder
             'contrasena' => Hash::make('contrasena123'),
             'rfc' => 'RASO900606XYZ',
             'especialidad' => 'Marketing',
-            'imagen' => 'ruta/a/la/imagen6.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/6.jpeg',
         ]);
 
         Trabajadore::create([
@@ -80,7 +80,7 @@ class TrabajadoresTableSeeder extends Seeder
             'contrasena' => Hash::make('contrasena123'),
             'rfc' => 'TODI900707XYZ',
             'especialidad' => 'Ventas',
-            'imagen' => 'ruta/a/la/imagen7.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/9.jpeg',
         ]);
 
         Trabajadore::create([
@@ -90,7 +90,7 @@ class TrabajadoresTableSeeder extends Seeder
             'contrasena' => Hash::make('contrasena123'),
             'rfc' => 'SACV900808XYZ',
             'especialidad' => 'Recursos Humanos',
-            'imagen' => 'ruta/a/la/imagen8.jpg',
+            'imagen' => 'https://rickandmortyapi.com/api/character/avatar/10.jpeg',
         ]);
     }
 }

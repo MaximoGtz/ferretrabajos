@@ -110,10 +110,12 @@
                                     <a href="/trabajadore"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Trabajadores</a>
                                 </li>
-                                <li>
-                                    <a href="/admin/listado"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Administradores</a>
-                                </li>
+                                @if (auth('administradore')->user()->usuario == 'superadmin' || auth('administradore')->user()->usuario == 'admin')
+                                    <li>
+                                        <a href="/admin/listado"
+                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Administradores</a>
+                                    </li>
+                                @endif
                             @elseif(auth('cliente')->check())
                                 <li>
                                     <a href="/cliente/perfil"

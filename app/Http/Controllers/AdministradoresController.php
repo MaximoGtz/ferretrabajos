@@ -7,7 +7,7 @@ use App\Policies\administradorePolicy;
 use Illuminate\Http\Request;
 use App\Models\administradore;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdministradoresController extends Controller
@@ -16,7 +16,12 @@ class AdministradoresController extends Controller
   {
     Gate::authorize('viewAny', $administradore);
     $administradores = administradore::where('estado', '=', 'activo')->get();
-    return view('/administrador/listado')->with('administradores', $administradores);
+
+    $user = Auth::user();
+    // Obtener el cliente
+    $administrador = administradore::findOrFail($user->id);
+    $adminTipo = $administrador->usuario;
+    return view('/administrador/listado')->with('administradores', $administradores)->with('adminTipo', $adminTipo);
   }
 
   public function create(administradore $administradore)
@@ -24,14 +29,14 @@ class AdministradoresController extends Controller
     Gate::authorize('create', $administradore);
     return view('/administrador/crear');
   }
-  
+
   public function store(Request $request, administradore $administradore)
   {
     Gate::authorize('create', $administradore);
     //dd($request->all());
     $administradore = new administradore();
-    
-    
+
+
     $administradore->nombre = $request->nombre;
     $administradore->apellido = $request->apellido;
     $administradore->usuario = $request->usuario;
@@ -39,9 +44,9 @@ class AdministradoresController extends Controller
     $administradore->imagen = 'admin_default.jpg';
     $administradore->rol = $request->rol;
     $administradore->estado = 'activo';
-    
+
     $administradore->save();
-    
+
     if ($request->hasFile('imagen')) {
       $img = $request->imagen;
       $nuevo = 'administradore_' . $administradore->id . '.' . $img->extension();
@@ -50,24 +55,24 @@ class AdministradoresController extends Controller
       $administradore->imagen = asset($ruta);
       $administradore->save();
     }
-    
+
     return redirect('/admin/listado');
   }
-  
+
   public function editar($id, administradore $administradore)
   {
     Gate::authorize('update', $administradore);
     $administradore = Administradore::find($id);
     return view('/administrador/editar')->with('administradore', $administradore);
   }
-  
+
   public function actualizar(Request $request, $id, administradore $administradore)
   {
     //dd($request->all());
     Gate::authorize('update', $administradore);
     $administradore = administradore::find($id);
-    
-    
+
+
     $administradore->nombre = $request->nombre;
     $administradore->apellido = $request->apellido;
     $administradore->usuario = $request->usuario;
@@ -75,10 +80,10 @@ class AdministradoresController extends Controller
     //$administradore->imagen=$request->imagen;
     $administradore->rol = $request->rol;
     //$administradore->estado='activo';
-    
-    
+
+
     $administradore->save();
-    
+
     if ($request->hasFile('imagen')) {
       $img = $request->imagen;
       $nuevo = 'administradore_' . $administradore->id . '.' . $img->extension();
@@ -87,18 +92,18 @@ class AdministradoresController extends Controller
       $administradore->imagen = asset($ruta);
       $administradore->save();
     }
-    
+
     return redirect('/admin/listado');
   }
-  
-  
+
+
   public function mostrar($id, administradore $administradore)
   {
     Gate::authorize('viewAny', $administradore);
     $administradore = Administradore::find($id);
     return view('/administrador/mostrar')->with('administradore', $administradore);
   }
-  
+
   public function destroy($id, administradore $administradore)
   {
     Gate::authorize('delete', $administradore);
@@ -117,8 +122,9 @@ class AdministradoresController extends Controller
 
 
   // solo vistas
-  public function inicioView(){
-    
+  public function inicioView()
+  {
+
   }
   // termina solo vistas
 }
